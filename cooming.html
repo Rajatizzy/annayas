@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coming Soon</title>
+  <style>
+    /* ------------------ Basic Reset ------------------ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      font-family: 'Arial', sans-serif;
+      background-color: #116cf2; /* Blue background */
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ------------------ Video Section ------------------ */
+    .video-section {
+      width: 100%;
+      height: auto; /* fixed height */
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+    .video-section video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* filter: brightness(50%); */
+    }
+
+    /* ------------------ Content Section ------------------ */
+    .content {
+      text-align: center;
+      padding: 60px 10px;
+    }
+
+    .content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    /* Typewriter effect */
+    .typewriter {
+      display: inline-block;
+      overflow: hidden;
+      border-right: .15em solid #fff;
+      white-space: nowrap;
+      animation: typing 5s steps(25, end) infinite, blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      0% { width: 0 }
+      50% { width: 100% }
+      100% { width: 0 }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #fff }
+    }
+
+    .content p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ------------------ Responsive ------------------ */
+    @media (max-width: 768px) {
+      .content h1 { font-size: 2.2rem; }
+      .content p { font-size: 0.9rem; }
+      .video-section { height: 300px; }
+    }
+
+    @media (max-width: 480px) {
+      .content h1 { font-size: 1.2rem; }
+      .video-section { height: auto;
+     }
+     .video-section{
+        margin-top: 40px;
+     }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video Section -->
+<!-- Video Section -->
+<div class="video-section">
+  <video
+    id="heroVideo"
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+    poster="assets/img/video-poster.jpg"
+  >
+    <source src="assets/img/hero-video.mp4" type="video/mp4">
+  </video>
+</div>
+
+
+
+  <!-- Coming Soon Content -->
+  <div class="content">
+    <h1 class="typewriter">Something Amazing is Coming Soon!</h1>
+    <p>
+      We are working hard behind the scenes to bring you an incredible experience. Stay tuned and check back shortly for updates. Subscribe to our newsletter to be the first to know!
+    </p>
+  </div>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const video = document.getElementById("heroVideo");
+
+    if (!video) return;
+
+    // Try normal autoplay
+    video.play().catch(() => {
+      // Safari fallback – play on first user interaction
+      const playOnTouch = () => {
+        video.play();
+        document.removeEventListener("touchstart", playOnTouch);
+        document.removeEventListener("click", playOnTouch);
+      };
+
+      document.addEventListener("touchstart", playOnTouch, { once: true });
+      document.addEventListener("click", playOnTouch, { once: true });
+    });
+  });
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vistal Hero Section</title>
+    <style>
+        /* Reset & Base Styles */
+
+        /* Main Section Styles */
+        .section_hero-full {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            min-height: 800px;
+            z-index: 1;
+            background-color: #000000;
+        }
+
+        .section_hero-full {
+            min-height: 200vh;  
+            overflow: hidden;
+        }
+
+        .container-full {
+            width: 100%;
+            max-width: none;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        /* Hero Container */
+        .hero_container {
+            height: 200vh;       
+            position: relative;
+            width: 100vw;
+        }
+
+        /* Sticky Logo Section */
+        .hero_sticky {
+            position: sticky;
+            top: 10rem;
+            z-index: 1000;
+            padding-right: 3.75rem;
+            padding-bottom: 6rem;
+            padding-left: 3.75rem;
+            height: 0;
+            pointer-events: none;
+        }
+
+        .hero_wrap {
+            position: relative;
+            width: 100%;
+            max-width: 82.5rem;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .hero_title {
+            position: relative;
+            z-index: 2000;
+            margin-right: auto;
+            margin-left: auto;
+            padding-top: 28.6%;
+            transform: translate3d(0, 0, 0);
+            will-change: transform;
+              max-height: calc(100vh - 10rem);
+    overflow: hidden;
+        }
+
+        .img {
+            position: absolute;
+            inset: 0%;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(1.2);
+            pointer-events: auto;
+        }
+
+        /* Overlay & Background */
+.hero_img-overlay {
+    position: absolute;
+    inset: 0%;
+    z-index: 15;
+    background-image: url(https://cdn.prod.website-files.com/68ed0d0…/68eeb93…_house.avif);
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    pointer-events: none;
+
+}
+
+.hero_img-overlay::before {
+    content: '';
+    position: absolute;
+    inset: 0%;
+    background-image: url('https://cdn.prod.website-files.com/68ed0d0a63da252f1cf81e7e/68eeb9324e9cf7b816a09623_house.avif');
+    background-position: 50% 50%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.hero_img-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 0%;
+    background: #000; /* Black overlay */
+    opacity: 0;
+    transition: opacity 0.4s linear;
+    z-index: 2;
+}
+
+        .hero_bg {
+  position: absolute;
+  inset: 0%;
+  z-index: 2;
+
+  background-image: radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0),
+      rgba(0, 0, 0, 0.8)
+    ),
+    url(https://cdn.prod.website-files.com/68ed0d0a63da252f1cf81e7e/68ed4dca2f918d4d9bec4e05_cca08177ff658763a1e71f0d6107f6cb_Hero.webp);
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+        }
+
+        /* Bottom Content */
+        .hero_content-bottom {
+            position: absolute;
+            inset: auto 0% 0%;
+            z-index: 100;
+            display: block;
+            padding-top: 5.94rem;
+            padding-bottom: 5.94rem;
+            opacity: 0;
+            transform: translate3d(0, 20%, 0);
+            transition: transform 0.8s cubic-bezier(0.215, 0.610, 0.355, 1), 
+                        opacity 0.8s ease;
+            will-change: transform, opacity;
+        }
+
+        .padding-global {
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .container-large {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero_content-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: end;
+        }
+
+        /* Typography */
+        h1 {
+            color: white;
+            font-size: 4rem;
+            font-weight: 400;
+            line-height: 1.1;
+            margin: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+        }
+
+        .hero_content-right {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .hero_content-right > div {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .hero_content-right > div:first-child {
+            transition-delay: 0.3s;
+        }
+
+        .hero_content-right > div:last-child {
+            transition-delay: 0.4s;
+        }
+
+        /* Button Styles */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            text-decoration: none;
+            padding: 16px 32px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .icon_button {
+            display: flex;
+            align-items: center;
+        }
+
+        .icon_wrapper {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+        }
+
+        .icon-1x1-small {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .icon-1x1-small.is-hide {
+            opacity: 0;
+            transform: translateX(-100%);
+        }
+
+        .button:hover .icon-1x1-small:not(.is-hide) {
+            transform: translateX(100%);
+        }
+
+        .button:hover .is-hide {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero_content-wrap {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero_content-right {
+                font-size: 1rem;
+            }
+
+            .hero_sticky {
+                top: 5rem;
+                padding-right: 1.5rem;
+                padding-left: 1.5rem;
+            }
+        }
+
+        /* Dummy Content */
+        .about-sec {
+            width: 100%;
+            height: 1500px;
+            background-color: #111;
+            position: relative;
+            z-index: 50;
+            padding-top: 100px;
+        }
+
+        .about-sec h2 {
+            font-size: 3rem;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            text-align: center;
+        }
+
+        .about-sec p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            opacity: 0.6;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section data-w-id="ba4838b6-7369-1435-3e14-5660241bb651" class="section_hero-full">
+        <div data-w-id="f0ea5df4-1952-5779-cc8e-e5f134a49f43" class="container-full">
+            <div animation="bg" data-w-id="204fcb07-f978-0a13-5fe0-c07d23a713fc" class="hero_container">
+                
+                <!-- Fixed Background (No Zoom) -->
+                <div data-w-id="e505616e-ef8c-ac52-aa6d-78d116ddfaaa" 
+                     class="hero_bg" 
+                     style="opacity: 0;">
+                </div>
+
+                <!-- Overlay Image (Highest Z-index initially) -->
+                <div data-w-id="54ce6574-bf56-6452-f53f-c1e89ff16d2d" 
+                     class="hero_img-overlay" 
+                     style="opacity: 0;">
+                </div>
+
+                <!-- Sticky Logo Section -->
+                <div data-w-id="6ebc8ec4-b4a3-0edb-4e06-f8d2655e474f" class="hero_sticky">
+                    <div data-w-id="a21e19d0-9cff-d014-db13-7be00870e0d2" class="hero_wrap">
+                        <div animation="word" data-w-id="afc78ddb-af4b-dcb6-00d2-c2655d370876" class="hero_title">
+                            <img src="https://cdn.prod.website-files.com/68ed0d0a63da252f1cf81e7e/68effbf885de5f85da4f7132_Vistal%C2%A9.svg" 
+                                 loading="lazy" 
+                                 alt="Vistal Logo" 
+                                 class="img">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content Section -->
+                <div data-w-id="842a5d3b-ad35-53d5-3fc1-18e6399cdd70" 
+                     class="hero_content-bottom" 
+                     style="transform: translate3d(0px, 20%, 0px); opacity: 0;">
+                    <div data-w-id="0d08a931-1df8-ef81-b023-77d2029c3af6" class="padding-global">
+                        <div data-w-id="2de3c29b-439c-3610-4e25-1755c5713d89" class="container-large">
+                            <div data-w-id="a7682b53-5ff4-bc0b-a3a4-9ede56464742" class="hero_content-wrap wf-grid">
+                                <h1 data-w-id="2a7eed4b-6abe-34e6-b784-ce78fcc8dc2b">
+                                    Your gateway to prestige properties
+                                </h1>
+                                
+                                <div id="w-node-cb3bc42d-3b72-1aa9-055e-d8a4bdd0c22d-1cf81e79" 
+                                     data-w-id="cb3bc42d-3b72-1aa9-055e-d8a4bdd0c22d" 
+                                     class="w-layout-vflex hero_content-right">
+                                    
+                                    <div data-w-id="7b0f6e45-8b6d-6a9d-6a04-fcd2ca1adaea">
+                                        Bring your architectural projects to life with a template that puts your work front and center.
+                                    </div>
+                                    
+                                    <div data-w-id="6e17a2aa-ff3a-a9b6-19fa-335e6d4e282c">
+                                        <div data-wf--button--variant="base" data-w-id="d7408f9f-42c3-ccc7-a7b2-8a5ecd2901d1">
+                                            <a data-w-id="d7408f9f-42c3-ccc7-a7b2-8a5ecd2901d2" 
+                                               href="https://www.temlis.com" 
+                                               class="button w-inline-block">
+                                                <div data-w-id="d7408f9f-42c3-ccc7-a7b2-8a5ecd2901d3" 
+                                                     data-has-binding-on-children="true">
+                                                    Get started
+                                                </div>
+                                                <div data-w-id="90ffc106-0ebf-3b98-682b-1933d505af65" class="icon_button">
+                                                    <div data-w-id="d41b3145-3ee3-542e-487b-d511f6f8dc82" class="icon_wrapper">
+                                                        <svg data-w-id="fa3cb898-b479-8554-670f-cafb4bff2225" 
+                                                             xmlns="http://www.w3.org/2000/svg" 
+                                                             width="100%" 
+                                                             viewBox="0 0 24 24" 
+                                                             fill="none" 
+                                                             class="icon-1x1-small is-hide">
+                                                            <path data-w-id="fa3cb898-b479-8554-670f-cafb4bff2226" 
+                                                                  d="M13.5 19.5L12.4425 18.4425L18.1275 12.75H3V11.25H18.1275L12.4425 5.5575L13.5 4.5L21 12L13.5 19.5Z" 
+                                                                  fill="currentColor"></path>
+                                                        </svg>
+                                                        
+                                                        <svg data-w-id="59fb4a0f-561e-85be-9854-e60238e927cd" 
+                                                             xmlns="http://www.w3.org/2000/svg" 
+                                                             width="100%" 
+                                                             viewBox="0 0 24 24" 
+                                                             fill="none" 
+                                                             class="icon-1x1-small">
+                                                            <path data-w-id="59fb4a0f-561e-85be-9854-e60238e927ce" 
+                                                                  d="M13.5 19.5L12.4425 18.4425L18.1275 12.75H3V11.25H18.1275L12.4425 5.5575L13.5 4.5L21 12L13.5 19.5Z" 
+                                                                  fill="currentColor"></path>
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-sec">
+        <h2>About Section</h2>
+        <p>This section appears after the hero. The overlay effect smoothly transitions as you scroll.</p>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Scroll Animation Initialized');
+            
+            // Elements
+            const heroContent = document.querySelector('.hero_content-bottom');
+            const heroTitle = document.querySelector('.hero_title');
+            const overlay = document.querySelector('.hero_img-overlay');
+            const background = document.querySelector('.hero_bg');
+            const heading = document.querySelector('h1');
+            const contentElements = document.querySelectorAll('.hero_content-right > div');
+            
+            /* ---------------------------
+               ✅ INITIAL FADE IN (PAGE LOAD)
+            ----------------------------*/
+            setTimeout(() => {
+                // Step 1: Background fade in
+                background.style.opacity = '1';
+                
+                // Step 2: Show scroll indicator (optional)
+                
+                // Step 3: Slide up content
+                setTimeout(() => {
+                    heroContent.style.opacity = '1';
+                    heroContent.style.transform = 'translateY(0)';
+                    
+                    // Staggered text animations
+                    heading.style.opacity = '1';
+                    heading.style.transform = 'translateY(0)';
+                    
+                    contentElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.style.opacity = '1';
+                            el.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                }, 300);
+                
+            }, 300);
+
+            /* ---------------------------
+               ✅ SMOOTH SCROLL SYSTEM (NO ZOOM)
+            ----------------------------*/
+            let scrolling = false;
+            let lastScrollY = 0;
+            
+            function handleScroll() {
+                const scrolled = window.scrollY;
+                const vh = window.innerHeight;
+                const heroHeight = document.querySelector('.section_hero-full').offsetHeight;
+                
+                // ✅ 0 → 1 smooth progress
+                const progress = Math.min(scrolled / (vh * 1.5), 1);
+                
+                /* ✅ LOGO PARALLAX */
+                if (heroTitle) {
+                    const logoParallax = scrolled * 0.35;
+                    heroTitle.style.transform = `translateY(${logoParallax}px)`;
+                    
+                    // Logo opacity slightly reduces as we scroll
+                    const logoOpacity = Math.max(0.3, 1 - progress * 0.7);
+                    heroTitle.style.opacity = logoOpacity;
+                }
+                
+                /* ✅ BACKGROUND - NO ZOOM, just opacity */
+                if (background) {
+                    // ✅ No zoom effect - just keep it fixed
+                    background.style.transform = 'none';
+                    
+                    // Background opacity slightly reduces
+                    const bgOpacity = Math.max(0.4, 1 - progress * 0.6);
+                    background.style.opacity = bgOpacity;
+                }
+                
+                /* ✅ SMOOTH OVERLAY BLACKOUT SYSTEM */
+                if (overlay) {
+                    // Overlay opacity increases with scroll
+                    overlay.style.opacity = progress;
+                    
+                    // Overlay Z-index changes as we scroll past halfway
+                    if (progress > 0.5) {
+                        overlay.style.zIndex = '50'; // Lower after halfway
+                    } else {
+                        overlay.style.zIndex = '9000'; // High initially
+                    }
+                    
+                    overlay.style.pointerEvents = 'none';
+                }
+                
+                /* ✅ CONTENT FADE OUT */
+                if (heroContent) {
+                    // Content fades out as we scroll
+                    const contentOpacity = Math.max(0, 1 - (scrolled / (vh * 0.8)));
+                    heroContent.style.opacity = contentOpacity;
+                }
+                
+                lastScrollY = scrolled;
+                scrolling = false;
+            }
+            
+            // Throttled scroll event
+            window.addEventListener('scroll', () => {
+                if (!scrolling) {
+                    requestAnimationFrame(handleScroll);
+                    scrolling = true;
+                }
+            }, { passive: true });
+            
+            // Initial call
+            handleScroll();
+
+            /* ---------------------------
+               ✅ BUTTON HOVER EFFECTS
+            ----------------------------*/
+            const buttons = document.querySelectorAll('.button');
+            buttons.forEach(button => {
+                const iconHide = button.querySelector('.is-hide');
+                const iconShow = button.querySelector('.icon-1x1-small:not(.is-hide)');
+                
+                if (!iconHide || !iconShow) return;
+                
+                button.addEventListener('mouseenter', () => {
+                    iconHide.style.opacity = '1';
+                    iconHide.style.transform = 'translateX(0)';
+                    iconShow.style.transform = 'translateX(100%)';
+                });
+                
+                button.addEventListener('mouseleave', () => {
+                    iconHide.style.opacity = '0';
+                    iconHide.style.transform = 'translateX(-100%)';
+                    iconShow.style.transform = 'translateX(0)';
+                });
+            });
+
+            /* ---------------------------
+               ✅ RESIZE HANDLER
+            ----------------------------*/
+            window.addEventListener('resize', handleScroll);
+            
+            // Debug info
+            console.log('Elements loaded:', {
+                heroTitle: !!heroTitle,
+                overlay: !!overlay,
+                background: !!background,
+                heroContent: !!heroContent
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+    <!-- Cards Section -->
+    <div class="cards-section ">
+      <div class="scroll-progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div class="cards-sticky-container">
+        <!-- Initial Grid View -->
+        <div class="cards-grid" id="cardsGrid">
+          <!-- Card 1 -->
+          <div class="grid-card" data-card="1">
+            <div class="grid-img">
+              <!-- <img src="https://cdn.prod.website-files.com/68ed0d0a63da252f1cf81e7e/68ed7938feef1d10be119442_adcae94b00f1f21773b68f2bcced06d2_Hero%20%281%29.avif" alt="Shopping Center"> -->
+              <img src="assets/img/15.jpg" alt="Shopping Center">
+            </div>
+            <div class="grid-title">Shopping Center</div>
+            <div class="grid-description">
+              A contemporary, light-filled shopping center offering an unforgettable visitor experience.
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="grid-card" data-card="2">
+            <div class="grid-img">
+              <img src="assets/img/16.jpg" alt="Sustainable Offices">
+            </div>
+            <div class="grid-title">Sustainable Offices</div>
+            <div class="grid-description">
+              A contemporary, light-filled offices with ecological technologies and recyclable materials.
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="grid-card" data-card="3">
+            <div class="grid-img">
+              <img src="assets/img/17.jpg" alt="Urban Retreat">
+            </div>
+            <div class="grid-title">Urban Retreat</div>
+            <div class="grid-description">
+              Golden Gate Park offers landscapes, museums, and gardens, perfect for walks and picnics.
+            </div>
+          </div>
+        </div>
+
+        <!-- Expanded Card 1 -->
+        <div class="expanded-card" id="expandedCard1">
+          <div class="expanded-img">
+            <img src="assets/img/15.jpg" alt="Shopping Center">
+          </div>
+          <div class="expanded-content">
+            <h2 class="expanded-title">Shopping Center</h2>
+            <p class="expanded-description">
+              A contemporary, light-filled shopping center offering an unforgettable visitor experience with modern architecture. The design incorporates sustainable materials and innovative lighting solutions.
+            </p>
+            <div class="expanded-footer">
+              <span class="expanded-tag">Commercial</span>
+              <div class="expanded-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 19.5L12.4425 18.4425L18.1275 12.75H3V11.25H18.1275L12.4425 5.5575L13.5 4.5L21 12L13.5 19.5Z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="card-counter">1/3</div>
+        </div>
+
+        <!-- Expanded Card 2 -->
+        <div class="expanded-card" id="expandedCard2">
+          <div class="expanded-img">
+            <img src="assets/img/16.jpg" alt="Sustainable Offices">
+          </div>
+          <div class="expanded-content">
+            <h2 class="expanded-title">Sustainable Offices</h2>
+            <p class="expanded-description">
+              A contemporary, light-filled offices with ecological technologies and recyclable materials for modern workspace. Features include solar panels, rainwater harvesting, and energy-efficient systems.
+            </p>
+            <div class="expanded-footer">
+              <span class="expanded-tag">Eco-Friendly</span>
+              <div class="expanded-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 19.5L12.4425 18.4425L18.1275 12.75H3V11.25H18.1275L12.4425 5.5575L13.5 4.5L21 12L13.5 19.5Z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="card-counter">2/3</div>
+        </div>
+
+        <!-- Expanded Card 3 -->
+        <div class="expanded-card" id="expandedCard3">
+          <div class="expanded-img">
+            <img src="assets/img/17.jpg" alt="Urban Retreat">
+          </div>
+          <div class="expanded-content">
+            <h2 class="expanded-title">Urban Retreat</h2>
+            <p class="expanded-description">
+              Golden Gate Park offers landscapes, museums, and gardens, perfect for walks and picnics in urban setting. The space features botanical gardens, walking trails, and recreational facilities.
+            </p>
+            <div class="expanded-footer">
+              <span class="expanded-tag">Public Space</span>
+              <div class="expanded-arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 19.5L12.4425 18.4425L18.1275 12.75H3V11.25H18.1275L12.4425 5.5575L13.5 4.5L21 12L13.5 19.5Z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="card-counter">3/3</div>
+        </div>
+      </div>
+    </div>
